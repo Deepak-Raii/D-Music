@@ -7,15 +7,31 @@ import {
   StatusBar,
   Image,
 } from 'react-native';
+import {useState} from 'react';
 import React from 'react';
 import colors from '../common/colors';
 import {FontAwesomeIcon} from '@fortawesome/react-native-fontawesome';
 import {faHeart} from '@fortawesome/free-solid-svg-icons/faHeart';
-import {faBackward, faEllipsis, faForward, faPlay, faRepeat, faShuffle} from '@fortawesome/free-solid-svg-icons';
+import {
+  faBackward,
+  faEllipsis,
+  faForward,
+  faPlay,
+  faRepeat,
+  faShuffle,
+} from '@fortawesome/free-solid-svg-icons';
+import {responsiveFontSize} from 'react-native-responsive-dimensions';
+import Slider from '@react-native-community/slider';
 
 const height = Dimensions.get('window').height;
 const width = Dimensions.get('window').width;
 const Home = () => {
+  const [currentTime, setCurrentTime] = useState(26);
+  const [totalDuration, setTotalDuration] = useState(100);
+
+  const onSliderValueChange = value => {
+    setCurrentTime(value);
+  };
   return (
     <SafeAreaView style={Style.mainView}>
       <StatusBar hidden />
@@ -29,22 +45,38 @@ const Home = () => {
           </View>
         </View>
       </View>
-      
 
       <View style={Style.mainView2}>
-      <View style={Style.songRowView}>
-        <FontAwesomeIcon icon={faHeart} color="white" size={30} />
-        <Text style={Style.songTitle}>Song 1</Text>
-        <FontAwesomeIcon icon={faEllipsis} color="white" size={30} />
-      </View>
+        <View style={Style.songRowView}>
+          <FontAwesomeIcon icon={faHeart} color="white" size={30} />
+          <Text style={Style.songTitle}>Ringtone</Text>
+          <FontAwesomeIcon icon={faEllipsis} color="white" size={30} />
+        </View>
 
-      <View style={Style.btnView}>
-        <FontAwesomeIcon icon={faShuffle} color='white' size={20}/>
-        <FontAwesomeIcon icon={faBackward} color='white' size={30}/>
-        <FontAwesomeIcon icon={faPlay} color='white' size={40}/>
-        <FontAwesomeIcon icon={faForward} color='white' size={30}/>
-        <FontAwesomeIcon icon={faRepeat} color='white' size={20}/>
-      </View>
+        <View style={{width: '100%', alignSelf: 'center'}}>
+          <Slider
+            style={Style.slider}
+            minimumValue={0}
+            maximumValue={totalDuration}
+            value={currentTime}
+            onValueChange={onSliderValueChange}
+            minimumTrackTintColor="#2979FF"
+            maximumTrackTintColor="#BDBDBD"
+            thumbTintColor="#2979FF"
+          />
+          <View style={Style.durationView}>
+            <Text style={Style.time}>01 : 14</Text>
+            <Text style={Style.time}>04 : 45</Text>
+          </View>
+        </View>
+
+        <View style={Style.btnView}>
+          <FontAwesomeIcon icon={faShuffle} color="white" size={18} />
+          <FontAwesomeIcon icon={faBackward} color="white" size={30} />
+          <FontAwesomeIcon icon={faPlay} color="white" size={60} />
+          <FontAwesomeIcon icon={faForward} color="white" size={30} />
+          <FontAwesomeIcon icon={faRepeat} color="white" size={18} />
+        </View>
       </View>
     </SafeAreaView>
   );
@@ -64,12 +96,12 @@ const Style = StyleSheet.create({
     justifyContent: 'flex-start',
     alignItems: 'center',
   },
-  mainView2:{
-    display:'flex',
-    justifyContent:'space-between', alignItems:'center',
-    width:'100%',
-    height:height*0.6-height*0.12
-
+  mainView2: {
+    display: 'flex',
+    justifyContent: 'space-around',
+    alignItems: 'center',
+    width: '100%',
+    height: height * 0.6 - height * 0.12,
   },
   mainView1InnerView: {
     backgroundColor: '#fb6b21',
@@ -109,9 +141,8 @@ const Style = StyleSheet.create({
   songTitle: {
     color: colors.SECONDARY_COLOR,
     textAlign: 'center',
-    fontSize: 30,
+    fontSize: responsiveFontSize(4),
     fontWeight: '700',
-    marginTop: 10,
   },
   songRowView: {
     display: 'flex',
@@ -121,12 +152,35 @@ const Style = StyleSheet.create({
     width: '90%',
     alignSelf: 'center',
   },
-  btnView:{
-    display:'flex',
-    justifyContent:'space-between',
-    alignItems:'center',
-    width:'95%',
-    flexDirection:'row',
+  btnView: {
+    display: 'flex',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+    width: '90%',
+    flexDirection: 'row',
+    alignSelf: 'center',
+  },
+  seekbarView: {
+    height: 3,
+    width: '85%',
+    backgroundColor: 'white',
+    borderRadius: 100,
+    alignSelf: 'center',
+  },
+  durationView: {
+    width: '85%',
+    display: 'flex',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+    flexDirection: 'row',
+    alignSelf: 'center',
+    marginTop: 15,
+  },
+  time: {
+    color: colors.SECONDARY_COLOR,
+  },
+  slider: {
+    width: '95%',
     alignSelf:'center'
-  }
+  },
 });

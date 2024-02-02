@@ -37,8 +37,8 @@ const BottomNavigation = () => {
         name="Home"
         options={{
           headerShown: false,
-          tabBarIcon: ({color, size}) => (
-            <FontAwesomeIcon icon={faHome} color={color} size={size} />
+          tabBarIcon: ({color, size, focused}) => (
+            <FontAwesomeIcon icon={faHome} color={color} size={focused ? 35 : 28}/>
           ),
         }}
       />
@@ -48,8 +48,8 @@ const BottomNavigation = () => {
         name="Playlist"
         options={{
           headerShown: true,
-          tabBarIcon: ({color, size}) => (
-            <FontAwesomeIcon icon={faListDots} color={color} size={size} />
+          tabBarIcon: ({color, size, focused}) => (
+            <FontAwesomeIcon icon={faListDots} color={color} size={focused ? 32 : 25} />
           ),
         }}
       />
@@ -59,8 +59,8 @@ const BottomNavigation = () => {
         name="Profile"
         options={{
           headerShown: false,
-          tabBarIcon: ({color, size}) => (
-            <FontAwesomeIcon icon={faUserAlt} color={color} size={size} />
+          tabBarIcon: ({color, size, focused}) => (
+            <FontAwesomeIcon icon={faUserAlt} color={color} size={focused ? 30 : 25} />
           ),
         }}
       />
