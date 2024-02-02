@@ -7,7 +7,7 @@ import {
   StatusBar,
   Image,
 } from 'react-native';
-import {useState} from 'react';
+import {useState, useEffect} from 'react';
 import React from 'react';
 import colors from '../common/colors';
 import {FontAwesomeIcon} from '@fortawesome/react-native-fontawesome';
@@ -23,6 +23,7 @@ import {
 import {responsiveFontSize} from 'react-native-responsive-dimensions';
 import Slider from '@react-native-community/slider';
 
+
 const height = Dimensions.get('window').height;
 const width = Dimensions.get('window').width;
 const Home = () => {
@@ -32,6 +33,7 @@ const Home = () => {
   const onSliderValueChange = value => {
     setCurrentTime(value);
   };
+
   return (
     <SafeAreaView style={Style.mainView}>
       <StatusBar hidden />
@@ -81,6 +83,10 @@ const Home = () => {
     </SafeAreaView>
   );
 };
+
+
+  
+
 
 export default Home;
 
