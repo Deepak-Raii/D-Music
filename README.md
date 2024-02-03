@@ -1,4 +1,4 @@
-This is a Music Player Application for vboth Android and ios devices.
+This is a Music Player Application for both Android and ios devices.
 
 This is a new [**React Native**](https://reactnative.dev) project, bootstrapped using [`@react-native-community/cli`](https://github.com/react-native-community/cli).
 
